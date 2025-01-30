@@ -32,18 +32,50 @@ beautifulsoup4
 
 ## Setup Instructions
 
-1. Open the notebook in Google Colab
-2. Mount Google Drive:
-   ```python
-   from google.colab import drive
-   drive.mount('/content/drive')
-   ```
-3. Install required packages:
-   ```python
-   !pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib markdown-it-py beautifulsoup4
-   ```
-4. Enable Google Docs API in Google Cloud Console
-5. Place your credentials file in the Colab environment
+1. Clone the Repository
+
+To get started, clone the repository to your local machine or Google Colab environment:
+
+```bash
+git clone https://github.com/AkhilTalashi1995/markdown_to_google_doc.git
+cd markdown_to_google_doc
+```
+2. Open the Notebook in Google Colab
+
+   1. Upload the ```markdown_to_google_doc.ipynb``` file to Google Colab.
+   
+   2. Open the notebook in Colab.
+
+3. Mount Google Drive
+   
+Run the following code in Colab to mount Google Drive:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+4. Install Required Packages
+
+Install the necessary dependencies by running:
+
+```python
+!pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib markdown-it-py beautifulsoup4
+```
+5. Enable Google Docs API
+   
+      1. Go to the Google Cloud Console.
+      
+      2. Enable the Google Docs API for your project.
+      
+      3. Create OAuth 2.0 credentials and download the credentials.json file.
+      
+      4. Upload the credentials.json file to your Google Drive (e.g., in the Colab Notebooks folder).
+
+6. Run the script:
+
+      1. Open the ```markdown_to_google_doc.ipynb``` notebook in Google Colab.
+      2. Run the script by executing all cells in the notebook.
+      3. Once the script has been executed successfully, you will get a link to the created Google Doc with all your markdown_text converted             and formatted.
 
 ## Usage
 
@@ -79,10 +111,6 @@ The script includes comprehensive error handling for:
 - Needs Google Drive mounting
 - API quota limitations apply
 - Some markdown features might not have exact Google Docs equivalents
-
-## Contributing
-
-Feel free to submit issues and enhancement requests!
 
 ## License
 
