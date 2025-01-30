@@ -1,183 +1,111 @@
-Markdown to Google Docs Converter
-This project converts Markdown content into a formatted Google Doc using the Google Docs API. It is designed to run in Google Colab and supports features like headings, nested lists, checkboxes, and assignee mentions (@name).
+# Markdown to Google Docs Converter
 
-Features
-Google Docs Integration: Creates a new Google Doc programmatically.
+A Python script that converts markdown-formatted meeting notes into well-formatted Google Docs, running in Google Colab. The script maintains document structure, formatting, and special elements like checkboxes and @mentions.
 
-Markdown Parsing: Converts Markdown to HTML and then to Google Docs format.
+## Features
 
-Formatting:
+- Converts markdown to Google Docs format
+- Maintains heading hierarchy (H1, H2, H3)
+- Preserves nested bullet points with proper indentation
+- Converts markdown checkboxes to Google Docs checkboxes
+- Highlights @mentions in bold and color
+- Applies distinct styling to footer information
+- Handles authentication and authorization automatically in Colab
 
-Headings (#, ##, ###) are converted to Google Docs heading styles.
+## Prerequisites
 
-Nested bullet points are preserved with proper indentation.
+- Google Account
+- Google Colab access
+- Google Drive mounted in Colab
+- Necessary API permissions enabled
 
-Checkboxes (- [ ], - [x]) are converted to Google Docs checkboxes.
+## Required Dependencies
 
-Assignee mentions (@name) are styled in bold.
-
-Footer content (after <hr>) is styled distinctly (italic and gray).
-
-Error Handling: Gracefully handles errors during execution.
-
-Setup Instructions
-1. Prerequisites
-A Google account.
-
-Google Drive to store credentials and token files.
-
-A Google Cloud Platform (GCP) project with the Google Docs API enabled.
-
-2. Google Cloud Platform Setup
-Go to the Google Cloud Console.
-
-Create a new project or select an existing one.
-
-Enable the Google Docs API:
-
-Navigate to APIs & Services > Library.
-
-Search for "Google Docs API" and enable it.
-
-Create OAuth 2.0 credentials:
-
-Go to APIs & Services > Credentials.
-
-Click Create Credentials > OAuth client ID.
-
-Choose Desktop App as the application type.
-
-Download the credentials file (credentials.json).
-
-3. Upload Credentials to Google Drive
-Upload the credentials.json file to your Google Drive (e.g., in the Colab Notebooks folder).
-
-Ensure the file path is correctly referenced in the code.
-
-4. Run in Google Colab
-Open the Google Colab notebook.
-
-Mount Google Drive:
-
-from google.colab import drive
-drive.mount('/content/drive')
-Run the code cell-by-cell to authenticate and create the Google Doc.
-
-Required Dependencies
+```python
 google-api-python-client
-
 google-auth
-
 google-auth-httplib2
-
 google-auth-oauthlib
-
 markdown-it-py
-
 beautifulsoup4
+```
 
-Install the dependencies using:
+## Setup Instructions
 
-bash
+1. Clone the Repository
 
-!pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib markdown-it-py beautifulsoup4
-How to Run in Colab
-Open the Colab notebook.
+To get started, clone the repository to your local machine or Google Colab environment:
 
-Mount Google Drive:
+```bash
+git clone https://github.com/AkhilTalashi1995/markdown_to_google_doc.git
+cd markdown_to_google_doc
+```
+2. Open the Notebook in Google Colab
 
+   1. Upload the ```markdown_to_google_doc.ipynb``` file to Google Colab.
+   
+   2. Open the notebook in Colab.
+
+3. Mount Google Drive
+   
+Run the following code in Colab to mount Google Drive:
+
+```python
 from google.colab import drive
 drive.mount('/content/drive')
-Run the code to authenticate and create the Google Doc:
+```
+4. Install Required Packages
 
-try:
-    docs_service = initialize_docs_api()
-    print("Successfully authenticated and initialized Google Docs API")
+Install the necessary dependencies by running:
 
-    doc_id = create_google_doc(docs_service)
+```python
+!pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib markdown-it-py beautifulsoup4
+```
+5. Enable Google Docs API
+   
+      1. Go to the Google Cloud Console.
+      
+      2. Enable the Google Docs API for your project.
+      
+      3. Create OAuth 2.0 credentials and download the credentials.json file.
+      
+      4. Upload the credentials.json file to your Google Drive (e.g., in the Colab Notebooks folder).
 
-    html_content = markdown_to_html(markdown_text)
-    print(html_content)
+## Usage
 
-    html_to_google_docs(docs_service, doc_id, html_content)
+1. Copy the notebook to your Google Drive
+2. Open it in Google Colab
+3. Run all cells to install dependencies and authenticate
+4. Modify the `markdown_text` variable with your own markdown content
+5. Run the conversion script
+6. Access the created Google Doc via the provided link
 
-    print(f"Google Doc created successfully. Access it here: https://docs.google.com/document/d/{doc_id}/edit")
+## Error Handling
 
-except Exception as e:
-    print(f"Error: {e}")
+The script includes comprehensive error handling for:
+- Authentication failures
+- API quota limits
+- Permission issues
+- Invalid markdown format
+- Network connectivity problems
 
-Example Markdown Input
-markdown
+## Formatting Details
 
-# Product Team Sync - May 15, 2023
+- Title: Heading 1 style
+- Section headers: Heading 2 style
+- Sub-section headers: Heading 3 style
+- Nested bullets: Proper indentation
+- Checkboxes: Converted to Google Docs checkboxes
+- @mentions: Bold and colored text
+- Footer: Distinct styling with smaller, gray text
 
-## Attendees
-- Sarah Chen (Product Lead)
-- Mike Johnson (Engineering)
-- Anna Smith (Design)
-- David Park (QA)
+## Limitations
 
-## Agenda
+- Requires Google Colab environment
+- Needs Google Drive mounting
+- API quota limitations apply
+- Some markdown features might not have exact Google Docs equivalents
 
-### 1. Sprint Review
-* Completed Features
-  * User authentication flow
-  * Dashboard redesign
-  * Performance optimization
-    * Reduced load time by 40%
-    * Implemented caching solution
-* Pending Items
-  * Mobile responsive fixes
-  * Beta testing feedback integration
+## License
 
-### 2. Current Challenges
-* Resource constraints in QA team
-* Third-party API integration delays
-* User feedback on new UI
-  * Navigation confusion
-  * Color contrast issues
-
-### 3. Next Sprint Planning
-* Priority Features
-  * Payment gateway integration
-  * User profile enhancement
-  * Analytics dashboard
-* Technical Debt
-  * Code refactoring
-  * Documentation updates
-
-## Action Items
-- [ ] @sarah: Finalize Q3 roadmap by Friday
-- [ ] @mike: Schedule technical review for payment integration
-- [ ] @anna: Share updated design system documentation
-- [ ] @david: Prepare QA resource allocation proposal
-
-## Next Steps
-* Schedule individual team reviews
-* Update sprint board
-* Share meeting summary with stakeholders
-
-## Notes
-* Next sync scheduled for May 22, 2023
-* Platform demo for stakeholders on May 25
-* Remember to update JIRA tickets
-
----
-Meeting recorded by: Sarah Chen
-Duration: 45 minutes
-Output
-The output is a Google Doc with:
-
-Proper headings (Heading 1, Heading 2, Heading 3).
-
-Nested bullet points with proper indentation.
-
-Checkboxes for action items.
-
-Bold styling for assignee mentions (@name).
-
-Distinct styling for footer content.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
+This project is licensed under the MIT License - see the LICENSE file for details.
