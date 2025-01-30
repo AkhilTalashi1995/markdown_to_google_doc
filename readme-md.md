@@ -71,12 +71,6 @@ Install the necessary dependencies by running:
       
       4. Upload the credentials.json file to your Google Drive (e.g., in the Colab Notebooks folder).
 
-6. Run the script:
-
-      1. Open the ```markdown_to_google_doc.ipynb``` notebook in Google Colab.
-      2. Run the script by executing all cells in the notebook.
-      3. Once the script has been executed successfully, you will get a link to the created Google Doc with all your markdown_text converted             and formatted.
-
 ## Usage
 
 1. Copy the notebook to your Google Drive
